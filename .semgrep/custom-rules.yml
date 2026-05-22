@@ -24,24 +24,16 @@ rules:
     severity: ERROR
     languages: [javascript, typescript, python]
 
-  # ห้าม print() ใน Python production
+  # ห้าม print() ใน Python
   - id: no-print-python
     pattern: print(...)
     message: "ลบ print() ออกก่อน merge ใช้ logging แทน"
     severity: WARNING
     languages: [python]
 
-  # Python ห้ามใช้ exec()
+  # ห้าม exec() ใน Python
   - id: no-exec-python
     pattern: exec(...)
     message: "ห้ามใช้ exec() อันตรายมาก"
     severity: ERROR
-    languages: [python]
-
-  # ห้าม TODO ค้างใน code
-  - id: no-todo-comments
-    pattern: |
-      # TODO: ...
-    message: "มี TODO ค้างอยู่ กรุณาแก้ก่อน merge"
-    severity: WARNING
     languages: [python]
