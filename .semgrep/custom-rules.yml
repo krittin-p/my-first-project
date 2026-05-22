@@ -1,0 +1,47 @@
+rules:
+  # ห้าม console.log ใน production
+  - id: no-console-log
+    pattern: console.log(...)
+    message: "ลบ console.log ออกก่อน merge"
+    severity: WARNING
+    languages: [javascript, typescript]
+
+  # ห้าม eval()
+  - id: no-eval
+    pattern: eval(...)
+    message: "ห้ามใช้ eval() เด็ดขาด อันตรายมาก"
+    severity: ERROR
+    languages: [javascript, typescript]
+
+  # ห้าม hardcode password
+  - id: no-hardcoded-password
+    patterns:
+      - pattern: $VAR = "..."
+      - metavariable-regex:
+          metavariable: $VAR
+          regex: ".*(password|passwd|secret|api_key|token).*"
+    message: "ห้าม hardcode password/secret ใช้ environment variable แทน"
+    severity: ERROR
+    languages: [javascript, typescript, python]
+
+  # ห้าม print() ใน Python production
+  - id: no-print-python
+    pattern: print(...)
+    message: "ลบ print() ออกก่อน merge ใช้ logging แทน"
+    severity: WARNING
+    languages: [python]
+
+  # Python ห้ามใช้ exec()
+  - id: no-exec-python
+    pattern: exec(...)
+    message: "ห้ามใช้ exec() อันตรายมาก"
+    severity: ERROR
+    languages: [python]
+
+  # ห้าม TODO ค้างใน code
+  - id: no-todo-comments
+    pattern: |
+      # TODO: ...
+    message: "มี TODO ค้างอยู่ กรุณาแก้ก่อน merge"
+    severity: WARNING
+    languages: [python]
