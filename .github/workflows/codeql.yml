@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
+      actions: read
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -16,5 +18,10 @@ jobs:
       - uses: github/codeql-action/init@v4
         with:
           languages: javascript
+          queries: security-extended
+
+      - uses: github/codeql-action/autobuild@v4
 
       - uses: github/codeql-action/analyze@v4
+        with:
+          category: "/language:javascript"
